@@ -10,7 +10,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import { useShoppingCartContext } from "../context/ShoppingCartContext";
 
 export default function Navbar() {
-  const { totalCartQuantity } = useShoppingCartContext();
+  const { totalCartQuantity, openCart } = useShoppingCartContext();
   return (
     <NavbarBs className="bg-white shadow-sm mb-3">
       <Container>
@@ -28,6 +28,7 @@ export default function Navbar() {
         <Button
           className="rounded-circle position-relative"
           variant="outline-primary"
+          onClick={openCart}
         >
           <FaShoppingCart />
           {totalCartQuantity > 0 && (

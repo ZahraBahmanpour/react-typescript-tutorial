@@ -1,8 +1,10 @@
-import { Button, Card, ToggleButton } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
+import { useShoppingCartContext } from "../context/ShoppingCartContext";
 import { Product } from "../model/product";
 
 export default function StoreItem({ id, name, price, imgUrl }: Product) {
-  const quantity = 0;
+  const { increaseCartQuantity, getItemQuantity } = useShoppingCartContext();
+  const quantity = getItemQuantity(id);
   return (
     <Card>
       <Card.Img variant="top" src={imgUrl} height="200px" />
@@ -13,7 +15,9 @@ export default function StoreItem({ id, name, price, imgUrl }: Product) {
         </Card.Title>
         <div className="mt-auto">
           {quantity === 0 ? (
-            <Button className="w-100">+ Add to Cart</Button>
+            <Button className="w-100" onClick={() => increaseCartQuantity(id)}>
+              + Add to Cart
+            </Button>
           ) : (
             <div
               className="d-flex align-items-center flex-column"
@@ -27,7 +31,7 @@ export default function StoreItem({ id, name, price, imgUrl }: Product) {
                 <div>
                   <span className="fs-3">{quantity}</span> in cart
                 </div>
-                <Button>+</Button>
+                <Button onClick={() => increaseCartQuantity(id)}>+</Button>
               </div>
               <Button variant="danger" size="sm">
                 Remove

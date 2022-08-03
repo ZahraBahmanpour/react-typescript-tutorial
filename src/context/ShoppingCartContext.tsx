@@ -23,7 +23,7 @@ type ShoppingCartProviderProps = {
   children: ReactNode;
 };
 
-type CartItem = { product: Product; quantity: number };
+export type CartItem = { product: Product; quantity: number };
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);

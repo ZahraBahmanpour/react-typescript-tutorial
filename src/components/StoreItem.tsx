@@ -3,7 +3,12 @@ import { useShoppingCartContext } from "../context/ShoppingCartContext";
 import { Product } from "../model/product";
 
 export default function StoreItem({ id, name, price, imgUrl }: Product) {
-  const { increaseCartQuantity, getItemQuantity } = useShoppingCartContext();
+  const {
+    increaseCartQuantity,
+    getItemQuantity,
+    decreaseCartQuantity,
+    removeFromCart,
+  } = useShoppingCartContext();
   const quantity = getItemQuantity(id);
   return (
     <Card>
@@ -27,13 +32,17 @@ export default function StoreItem({ id, name, price, imgUrl }: Product) {
                 className="d-flex align-items-center justify-content-center"
                 style={{ gap: ".5rem" }}
               >
-                <Button>-</Button>
+                <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
                 <div>
                   <span className="fs-3">{quantity}</span> in cart
                 </div>
                 <Button onClick={() => increaseCartQuantity(id)}>+</Button>
               </div>
-              <Button variant="danger" size="sm">
+              <Button
+                variant="danger"
+                size="sm"
+                onClick={() => removeFromCart(id)}
+              >
                 Remove
               </Button>
             </div>

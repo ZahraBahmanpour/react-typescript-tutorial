@@ -7,8 +7,10 @@ import {
 } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { useShoppingCartContext } from "../context/ShoppingCartContext";
 
 export default function Navbar() {
+  const { totalCartQuantity } = useShoppingCartContext();
   return (
     <NavbarBs className="bg-white shadow-sm mb-3">
       <Container>
@@ -28,9 +30,11 @@ export default function Navbar() {
           variant="outline-primary"
         >
           <FaShoppingCart />
-          <Badge className="rounded-circle bg-danger position-absolute">
-            3
-          </Badge>
+          {totalCartQuantity > 0 && (
+            <Badge className="rounded-circle bg-danger position-absolute">
+              {totalCartQuantity}
+            </Badge>
+          )}
         </Button>
       </Container>
     </NavbarBs>

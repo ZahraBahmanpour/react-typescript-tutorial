@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Col, Row } from "react-bootstrap";
 import { Product } from "../model/product";
 
 export default function Store() {
@@ -11,5 +12,14 @@ export default function Store() {
     };
     fetchData();
   }, []);
-  return <h1>Store</h1>;
+  return (
+    <>
+      <h1>Store</h1>
+      <Row xs={1} md={2} lg={3} className="g-3">
+        {products.map((product) => (
+          <Col key={product.id}>{JSON.stringify(product)}</Col>
+        ))}
+      </Row>
+    </>
+  );
 }
